@@ -8,6 +8,7 @@ div img {
     height: 560px;
     object-fit: cover;
     border-radius: 315px;
+    display: block;
 }
 
 #first_img {
