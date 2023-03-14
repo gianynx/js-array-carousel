@@ -1,42 +1,47 @@
-const slider = document.querySelector('.slider');
-
-let slides = '';
-
 const images = [
-    'img/01.jpg',
-    'img/02.jpg',
-    'img/03.jpg'
+    'img/01.webp',
+    'img/02.webp',
+    'img/03.webp'
 ];
 
-let image_1 = images[0];
-let image_2 = images[1];
-let image_3 = images[2];
+const slider = document.querySelector('.slider');
 
- for (let a = 0; a < images.length; a++) {
-    slides = `
+let currentSlide = 0;
+let slides = '';
+
+for (let a = 0; a < images.length; a++) {
+    slides += `
     <div class="slide w-100 h-100">
-    <img id="first_img" src="${image_1}" alt="first_img_carousel">
-    <img id="second_img" class="d-none" src="${image_2}" alt="seco_carousel">
-    <img class="d-none" src="${image_3}" alt="third_img_carousel">
+    <img src="${images[a]}" alt="img-carousel">
     </div>
     `
- };
+};
 
- slider.innerHTML += slides;
+slider.innerHTML += slides;
 
- const btnLeft = document.getElementById('btnLeft');
- const btnRight = document.getElementById('btnRight');
+document.querySelectorAll('.slide')[currentSlide].classList.add('active');
 
-let currentSlide = '';
+const btnLeft = document.getElementById('btnLeft');
+const btnRight = document.getElementById('btnRight');
 
-btnRight.addEventListener('click', go_next)
-function go_next() {
+btnRight.addEventListener('click', goNext);
+function goNext() {
+    document.querySelectorAll('.slide')[currentSlide].classList.remove('active');
     if (currentSlide === images.length -1) {
         currentSlide = 0;
     } else {
         currentSlide++;
     }
-    document.getElementsByClassName('.slide')[currentSlide].classList.add('active');
-    document.getElementById('second_img').classList.remove('d-none');
+    document.querySelectorAll('.slide')[currentSlide].classList.add('active');
 }
 
+btnLeft.addEventListener('click', goBack);
+function goBack() {
+    document.querySelectorAll('.slide')[currentSlide].classList.remove('active');
+    if (currentSlide === 0) {
+        currentSlide = images.length -1;
+    } else {
+        currentSlide--;
+    }
+    document.querySelectorAll('.slide')[currentSlide].classList.add('active');
+}
