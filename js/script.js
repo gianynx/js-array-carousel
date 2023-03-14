@@ -16,8 +16,8 @@ let image_3 = images[2];
     slides = `
     <div class="slide w-100 h-100">
     <img id="first_img" src="${image_1}" alt="first_img_carousel">
-    <img src="${image_2}" alt="second_img_carousel">
-    <img src="${image_3}" alt="third_img_carousel">
+    <img id="second_img" class="d-none" src="${image_2}" alt="seco_carousel">
+    <img class="d-none" src="${image_3}" alt="third_img_carousel">
     </div>
     `
  };
@@ -27,4 +27,16 @@ let image_3 = images[2];
  const btnLeft = document.getElementById('btnLeft');
  const btnRight = document.getElementById('btnRight');
 
-let currentSlide = 
+let currentSlide = '';
+
+btnRight.addEventListener('click', go_next)
+function go_next() {
+    if (currentSlide === images.length -1) {
+        currentSlide = 0;
+    } else {
+        currentSlide++;
+    }
+    document.getElementsByClassName('.slide')[currentSlide].classList.add('active');
+    document.getElementById('second_img').classList.remove('d-none');
+}
+
